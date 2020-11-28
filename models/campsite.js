@@ -1,59 +1,65 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-require('mongoose-currency').loadType(mongoose);
+require("mongoose-currency").loadType(mongoose);
 const Currency = mongoose.Types.Currency;
 
-const commentSchema = new Schema({
-  rating: {
-    type: Number,
-    min: 1,
-    max: 5,
-    required: true,
-  },
-  text: {
-    type: String,
-    required: true,
-  },
-  author: {
-    type: String,
-    required: true,
-  },
-},{
-    timestamps: true
-});
-
-const campsiteSchema = new Schema({
-  name: {
+const commentSchema = new Schema(
+  {
+    rating: {
+      type: Number,
+      min: 1,
+      max: 5,
+      required: true,
+    },
+    text: {
       type: String,
       required: true,
-      unique: true
-  },
-  description: {
+    },
+    author: {
       type: String,
-      required: true
+      required: true,
+    },
   },
-  image: {
+  {
+    timestamps: true,
+  }
+);
+
+const campsiteSchema = new Schema(
+  {
+    name: {
       type: String,
-      required: true
-  },
-  elevation: {
+      required: true,
+      unique: true,
+    },
+    description: {
+      type: String,
+      required: true,
+    },
+    image: {
+      type: String,
+      required: true,
+    },
+    elevation: {
       type: Number,
-      required: true
-  },
-  cost: {
+      required: true,
+    },
+    cost: {
       type: Currency,
       required: true,
-      min: 0
-  },
-  featured: {
+      min: 0,
+    },
+    featured: {
       type: Boolean,
-      default: false
+      default: false,
+    },
+    comments: [commentSchema],
   },
-  comments: [commentSchema]
-}, {
-  timestamps: true
-});
+  {
+    timestamps: true,
+  }
+);
 
 const Campsite = mongoose.model("Campsite", campsiteSchema);
 
