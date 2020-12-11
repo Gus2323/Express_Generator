@@ -1,2 +1,4 @@
 node_modules
 bin
+index.html
+config.js
